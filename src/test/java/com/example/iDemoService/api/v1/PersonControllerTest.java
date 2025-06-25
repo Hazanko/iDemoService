@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -95,8 +96,7 @@ class PersonControllerTest {
     @Test
     void createOrUpdatePerson_ShouldResultIn444Error() throws Exception {
         //arrange
-        val givenPerson = adult;
-        when(personValidator.validatePerson(givenPerson)).thenReturn(false);
+        when(personValidator.validatePerson(any())).thenReturn(false);
 
         //act
         val result = mockMvc.perform(post("/api/v1/people")

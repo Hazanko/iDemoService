@@ -26,11 +26,11 @@ public class PersonController {
     public ResponseEntity<PersonDto> createOrUpdatePerson(
             @RequestBody PersonDto personDto
     ) {
-        if (!personValidator.validatePerson(personDto)) {
+        val person = personService.addOrUpdatePerson(personDto);
+
+        if (!personValidator.validatePerson(person)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); //opted for 404 because there is no 444 status
         }
-
-        val person = personService.addOrUpdatePerson(personDto);
 
         val responceObject = PersonDto.builder()
                 .id(person.getId())
