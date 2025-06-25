@@ -32,12 +32,12 @@ public class PersonController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); //opted for 404 because there is no 444 status
         }
 
-        val responceObject = PersonDto.builder()
+        val responseObject = PersonDto.builder()
                 .id(person.getId())
                 .birthDay(personDto.getBirthDay())
                 .build();
 
-        return new ResponseEntity<>(responceObject, HttpStatus.OK);
+        return new ResponseEntity<>(responseObject, HttpStatus.OK);
     }
 
 }
