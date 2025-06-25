@@ -3,6 +3,7 @@ package com.example.iDemoService.api.v1;
 import com.example.iDemoService.api.v1.dto.PersonDto;
 import com.example.iDemoService.service.PersonService;
 import com.example.iDemoService.validator.PersonValidator;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +30,14 @@ public class PersonController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); //opted for 404 because there is no 444 status
         }
 
+        val person = personService.addOrUpdatePerson(personDto);
 
-        return null;
+        val responceObject = PersonDto.builder()
+                .id(person.getId())
+                .birthDay(personDto.getBirthDay())
+                .build();
+
+        return new ResponseEntity<>(responceObject, HttpStatus.OK);
     }
 
 }
